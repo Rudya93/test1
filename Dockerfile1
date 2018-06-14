@@ -1,0 +1,2 @@
+FROM grebec/test
+ COPY /your/nginx.conf /nginx/conf/nginx.conf
