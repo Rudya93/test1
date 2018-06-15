@@ -23,15 +23,32 @@ pipeline {
            }
           
        
-            stage('docker_build') {agent any
+            stage('docker_build and push nginx') {agent any
             steps { 
-                sh 'docker build -t grebec/app:${BUILD_NUMBER} .'
+                sh 'docker build -t grebec/test:${BUILD_NUMBER} .'
                 sh 'docker images'
-                sh 'docker tag grebec/app:${BUILD_NUMBER} grebec/app:latest'    
+                sh 'docker tag grebec/test:${BUILD_NUMBER} grebec/test:latest'    
                 withDockerRegistry([ credentialsId: "ad5a78f7-c1af-4b37-a58f-ae20d9244457", url: ""]) 
-                { sh 'docker push grebec/app:latest'}
+                { sh 'docker push grebec/test:latest'}
             }
-            }          
-   
+            }    
+	           stage('Add nginx.conf and index.html') {agent any
+            steps { 
+                sh 'docker build -t grebec/test:${BUILD_NUMBER} .'
+                sh 'docker images'
+                sh 'docker tag grebec/test:${BUILD_NUMBER} grebec/test:latest'    
+                withDockerRegistry([ credentialsId: "ad5a78f7-c1af-4b37-a58f-ae20d9244457", url: ""]) 
+                { sh 'docker push grebec/test:latest'}
+            }
+            }   
+   	           stage('Deploy Nginx container') {agent any
+            steps { 
+                sh 'docker build -t grebec/test:${BUILD_NUMBER} .'
+                sh 'docker images'
+                sh 'docker tag grebec/test:${BUILD_NUMBER} grebec/test:latest'    
+                withDockerRegistry([ credentialsId: "ad5a78f7-c1af-4b37-a58f-ae20d9244457", url: ""]) 
+                { sh 'docker push grebec/test:latest'}
+            }
+            }   
    }
 }     
