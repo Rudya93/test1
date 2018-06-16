@@ -5,6 +5,7 @@ pipeline {
         
            stage('docker_build and push nginx') {agent any
             steps { 
+		//sh 'docker rm  -f webserver'
 		sh 'docker-machine rm -y oRudenko'
                 sh 'docker build -t grebec/test:${BUILD_NUMBER} .'
                 sh 'docker tag grebec/test:${BUILD_NUMBER} grebec/test:latest'    
