@@ -5,14 +5,14 @@ pipeline {
         
            stage('docker_build and push nginx') {agent any
             steps { 
-		sh 'docker rm  -f webserver'
-		sh 'docker-machine rm -y oRudenko'
-                //sh 'docker build -t grebec/test:${BUILD_NUMBER} .'
-                //sh 'docker tag grebec/test:${BUILD_NUMBER} grebec/test:latest'    
-               // withDockerRegistry([ credentialsId: "docker", url: ""]) 
-                //{ sh 'docker push grebec/test:latest'}
+		//sh 'docker rm  -f webserver'
+		//sh 'docker-machine rm -y oRudenko'
+                sh 'docker build -t grebec/test:${BUILD_NUMBER} .'
+                sh 'docker tag grebec/test:${BUILD_NUMBER} grebec/test:latest'    
+                withDockerRegistry([ credentialsId: "docker", url: ""]) 
+                { sh 'docker push grebec/test:latest'}
             }
-            }  /*   
+            }     
 	   stage('Add conf, index push my_nginx') {agent any
             steps { 
                 sh 'docker build -f Dockerfile1 -t grebec/test2:${BUILD_NUMBER} .'
@@ -39,6 +39,6 @@ pipeline {
 	       sh 'docker run -d -p 80:80 --name webserver grebec/test2'		    
 		    }
 		    }
-            }   */
+            }   
    }
 }     
