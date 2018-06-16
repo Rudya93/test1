@@ -32,23 +32,19 @@ pipeline {
                 { sh 'docker push grebec/test:latest'}
             }
             }    
-	           stage('Add nginx.conf and index.html') {agent any
+	           stage('Add conf, index push my_nginx') {agent any
             steps { 
-                sh 'docker build -t grebec/test:${BUILD_NUMBER} .'
+                sh 'docker build -t grebec/test2:${BUILD_NUMBER} .'
                 sh 'docker images'
-                sh 'docker tag grebec/test:${BUILD_NUMBER} grebec/test:latest'    
+                sh 'docker tag grebec/test2:${BUILD_NUMBER} grebec/test:latest'    
                 withDockerRegistry([ credentialsId: "ad5a78f7-c1af-4b37-a58f-ae20d9244457", url: ""]) 
-                { sh 'docker push grebec/test:latest'}
+                { sh 'docker push grebec/test2:latest'}
             }
             }   
-   	           stage('Deploy Nginx container') {agent any
+   	         /*  stage('Deploy Nginx container') {agent any
             steps { 
-                sh 'docker build -t grebec/test:${BUILD_NUMBER} .'
-                sh 'docker images'
-                sh 'docker tag grebec/test:${BUILD_NUMBER} grebec/test:latest'    
-                withDockerRegistry([ credentialsId: "ad5a78f7-c1af-4b37-a58f-ae20d9244457", url: ""]) 
-                { sh 'docker push grebec/test:latest'}
+               
             }
-            }   
+            }  */ 
    }
 }     
