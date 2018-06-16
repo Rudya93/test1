@@ -35,8 +35,8 @@ pipeline {
 	       sh 'docker-machine create --driver amazonec2 --amazonec2-region eu-west-2  --amazonec2-zone a oRudenko'
 	       sh 'docker-machine ls'
 	       sh 'docker-machine env oRudenko'
-	       sh 'eval $(docker-machine env oRudenko)'
-	       sh 'docker run -p 80:80 --name webserver grebec/test2'		    
+	       sh 'eval $(docker-machine env oRudenko) && docker run -d -p 80:80 --name webserver grebec/test2'
+	           
 		    }
 		    }
             }   
