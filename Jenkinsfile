@@ -20,10 +20,11 @@ pipeline {
                 { sh 'docker push grebec/test2:latest'}
             }
             }   
-   	         /*  stage('Deploy Nginx container') {agent any
+   	           stage('Deploy Nginx container') {agent any
             steps { 
-               
+               sh 'docker-machine create --driver amazonec2 --amazonec2-region eu-west-2  --amazonec2-zone a --amazonec2-tags oRudenko'
+	       sh 'docker-machine ls'    
             }
-            }  */ 
+            }   
    }
 }     
