@@ -1,2 +1,3 @@
 FROM grebec/test
  COPY *.conf /nginx/conf/nginx.conf
+ COPY *.html /nginx/html/index.html
