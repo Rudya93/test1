@@ -31,7 +31,10 @@ pipeline {
 		    {
                sh ('AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_DEFAULT_REGION=eu-west-2')
 	       sh 'docker-machine create --driver amazonec2 --amazonec2-region eu-west-2  --amazonec2-zone a oRudenko'
-	       sh 'docker-machine ls'    
+	       sh 'docker-machine ls'
+	       sh 'docker-machine env oRudenko'
+	       sh 'eval $(docker-machine env oRudenko)'
+	       sh 'docker run -d -p 8000:80 --name webserver grebec/test2'		    
 		    }
 		    }
             }   
