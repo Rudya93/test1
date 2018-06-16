@@ -1,25 +1,7 @@
 pipeline {
         agent none 
     stages { 
-          stage ('create inst') { agent any
-              steps {
-                withCredentials([[
-            $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: 'aws',
-            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]) 
-                      {
-            sh ('> hosts ')            
-            sh ('AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_DEFAULT_REGION=eu-west-2')
-            
-                        withAWS(region:'eu-west-2'){
-                                sh('python3.5 start.py')} 
-                        
-			}
-               }
-           }
-          
+                    
        
             stage('docker_build and push nginx') {agent any
             steps { 
