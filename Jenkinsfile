@@ -7,10 +7,10 @@ pipeline {
             steps { 
 		sh 'docker rm  -f webserver'
 		sh 'docker-machine rm -y oRudenko'
-                sh 'docker build -t grebec/test:${BUILD_NUMBER} .'
-                sh 'docker tag grebec/test:${BUILD_NUMBER} grebec/test:latest'    
-                withDockerRegistry([ credentialsId: "docker", url: ""]) 
-                { sh 'docker push grebec/test:latest'}
+                //sh 'docker build -t grebec/test:${BUILD_NUMBER} .'
+                //sh 'docker tag grebec/test:${BUILD_NUMBER} grebec/test:latest'    
+               // withDockerRegistry([ credentialsId: "docker", url: ""]) 
+                //{ sh 'docker push grebec/test:latest'}
             }
             }  /*   
 	   stage('Add conf, index push my_nginx') {agent any
