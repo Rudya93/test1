@@ -22,13 +22,13 @@ pipeline {
             }   
    	           stage('Deploy Nginx container') {agent any
             steps { 
-		    {
-		       withCredentials([[
+		     withCredentials([[
             $class: 'AmazonWebServicesCredentialsBinding',
             credentialsId: 'aws',
             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
        				 ]]) 
+		    {
                sh ('AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_DEFAULT_REGION=eu-west-2')
 	       sh 'docker-machine create --driver amazonec2 --amazonec2-region eu-west-2  --amazonec2-zone a oRudenko'
 	       sh 'docker-machine ls'    
