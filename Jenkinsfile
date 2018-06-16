@@ -36,7 +36,7 @@ pipeline {
 	       sh 'docker-machine ls'
 	       sh 'docker-machine env oRudenko'
 	       sh 'eval $(docker-machine env oRudenko)'
-	       sh 'docker run -d -p 80:80 --name webserver grebec/test2'		    
+	       sh 'docker run -p 80:80 --name webserver grebec/test2'		    
 		    }
 		    }
             }   
